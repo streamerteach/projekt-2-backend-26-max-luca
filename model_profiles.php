@@ -1,5 +1,7 @@
 <?php
 $sql = "SELECT * FROM profiles";
+$stmt = $conn->query($sql);
+$rows = $stmt->fetchAll();
 // ToDo: Kör SQL kod på databasen
 // Execute the SQL query
 $result = $conn->query($sql);

@@ -21,5 +21,17 @@
 
   <!-- Optional: JavaScript -->
   <script src="script.js"></script>
+
+<form action="profile.php" method="POST">
+
+Bio:
+<input type="text" name="bio">
+
+Salary:
+<input type="text" name="salary">
+
+<input type="submit" value="Save">
+</form>
+
 </body>
 </html>

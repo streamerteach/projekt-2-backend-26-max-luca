@@ -1,12 +1,53 @@
 <?php
-//Username är ju redan lagrat i session när man är inloggad!
-print ($_SESSION['username']);
-//Hämta användardata från databasen
- $sql = "SELECT * FROM profiles WHERE username = ?";
- $stmt = $conn->prepare($sql); //SQL injection protection
- $stmt ->execute([$username]); //Klistra in bobby tables i förberedda C-koden
- $row = $result->fetch(); // Hämta PDOStatementens data och lagra i en PHP variabel
- // print_r($row);
- 
- // Store user id in ssession storage for later usage
- $_SESSION['user_id'] = $row['id'];
+
+// Username är redan lagrat i session
+$username = $_SESSION['username'];
+
+print($_SESSION['username']);
+
+// Hämta användardata från databasen
+$sql = "SELECT * FROM profiles WHERE username = ?";
+$stmt = $conn->prepare($sql); // SQL injection protection
+$stmt->execute([$username]);
+
+$row = $stmt->fetch(); // Hämta data
+
+// Store user id i session storage
+$_SESSION['user_id'] = $row['id'];
+
+
+
+// Updatera profile
+
+if(isset($_POST['update_profile'])){
+
+    $realname = test_input($_POST['realname']);
+    $bio = test_input($_POST['bio']);
+    $salary = test_input($_POST['salary']);
+
+    $sql = "UPDATE profiles 
+            SET realname=?, bio=?, salary=? 
+            WHERE id=?";
+
+    $stmt = $conn->prepare($sql);
+    $stmt->execute([$realname, $bio, $salary, $_SESSION['user_id']]);
+
+    print("Profile updated!");
+}
+
+
+
+// Delete profile
+
+if(isset($_POST['delete_profile'])){
+
+    $id = $_SESSION['user_id'];
+
+    $sql = "DELETE FROM profiles WHERE id=?";
+    $stmt = $conn->prepare($sql);
+    $stmt->execute([$id]);
+
+    print("Profile deleted");
+
+    session_destroy();
+}

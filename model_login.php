@@ -25,7 +25,7 @@ if (!empty($_REQUEST['password'])) {
  $hash_from_DB = $row['passhash'];
 
 //Verify login
-if (password_verify($_REQUEST['password'], $hashed_password)) {
+if (password_verify($_REQUEST['password'], $hash_from_DB)) {
     print ("<p>Password matches hash from DB, Logging in...</p>");
     // Lagra användarnamn i sessionsvariabel
     $_SESSION['username'] = test_input($_REQUEST['username']);
@@ -33,4 +33,21 @@ if (password_verify($_REQUEST['password'], $hashed_password)) {
     else {
     print ("<p>Password does not match hash from DB, Try again...</p>");
     }
+
+
+if(isset($_POST['register'])){
+
+$username = test_input($_POST['username']);
+$realname = test_input($_POST['realname']);
+$password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+
+$sql = "INSERT INTO profiles(username, realname, passhash)
+VALUES (?, ?, ?)";
+
+$stmt = $conn->prepare($sql);
+$stmt->execute([$username, $realname, $password]);
+
+print("User registered!");
 }
+}
+
