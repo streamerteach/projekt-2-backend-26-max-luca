@@ -14,24 +14,7 @@
                 <h2>This is your profile page </h2>
                 <?php include "./view_account.php" ?>
 </article>
-</article>
-<?php include "view_profile.php" ?>
-
-  <h1>Hello World</h1>
-
-  <!-- Optional: JavaScript -->
-  <script src="script.js"></script>
-
-<form action="profile.php" method="POST">
-
-Bio:
-<input type="text" name="bio">
-
-Salary:
-<input type="text" name="salary">
-
-<input type="submit" value="Save">
-</form>
+<?php include "view_profiles.php" ?>
 
 </body>
 </html>

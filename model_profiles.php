@@ -8,7 +8,7 @@ $result = $conn->query($sql);
 // Fetch a row
 $row = $result->fetch();
 // Skriv ut raden
-print_r($row);
+//print_r($row);
 // Printa ut ett värde från associativa arrayen
-print($row['realname']);
+//print($row['realname']);
 ?>

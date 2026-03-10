@@ -1,4 +1,7 @@
+<?php include "model_login.php"; ?>
+
 <form action="login.php" method="POST">
+
 Username:
 <input type="text" name="username">
 
@@ -6,12 +9,14 @@ Password:
 <input type="password" name="password">
 
 <input type="submit" name="login" value="Login">
+
 </form>
 
 
 <h3>Register</h3>
 
 <form action="login.php" method="POST">
+
 Username:
 <input type="text" name="username">
 
@@ -22,4 +27,5 @@ Password:
 <input type="password" name="password">
 
 <input type="submit" name="register" value="Register">
+
 </form>

@@ -1,8 +1,10 @@
+<h3>Register</h3>
+
 <form action="login.php" method="POST">
 Username:
 <input type="text" name="username">
 
-Realname:
+Real name:
 <input type="text" name="realname">
 
 Password:
