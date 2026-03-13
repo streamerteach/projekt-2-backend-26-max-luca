@@ -1,4 +1,13 @@
 <?php
+// Like handler!
+if(isset($_POST['like_user'])){
+
+$sql = "UPDATE profiles SET likes = likes + 1 WHERE id=?";
+$stmt = $conn->prepare($sql);
+$stmt->execute([$_POST['like_user']]);
+
+}
+
 $sql = "SELECT * FROM profiles";
 $stmt = $conn->query($sql);
 $rows = $stmt->fetchAll();

@@ -8,10 +8,22 @@ foreach($rows as $row){
 print("<p>");
 print($row['username']);
 print(" - ");
-print($row['bio']);
+print("(" . $row['likes'] . " likes)");
+?>
+
+<form method="POST">
+
+<input type="hidden" name="like_user" value="<?php print($row['id']); ?>">
+
+<input type="submit" name="like" value="Like">
+
+</form>
+
+<?php
 print("</p>");
 }
 ?>
+
 <form method="GET">
 
 Sort by salary:
@@ -19,13 +31,5 @@ Sort by salary:
 <input type="text" name="salary">
 
 <input type="submit" value="Filter">
-
-</form>
-
-<form method="POST">
-
-<input type="hidden" name="like_user" value="<?php print($row['id']); ?>">
-
-<input type="submit" name="like" value="Like">
 
 </form>
