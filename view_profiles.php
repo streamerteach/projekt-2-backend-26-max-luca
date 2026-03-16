@@ -28,6 +28,16 @@ print("</div>");
 
 </form>
 
+<!-- Formulär för att dislikea en profil -->
+<form method="POST">
+
+<!-- Skickar id på användaren som får en dislike -->
+<input type="hidden" name="dislike_user" value="<?php print($row['id']); ?>">
+
+<input type="submit" name="dislike" value="Dislike">
+
+</form>
+
 <?php
 // Stänger profilkortet
 print("</div>");
