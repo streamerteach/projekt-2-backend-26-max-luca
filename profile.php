@@ -1,4 +1,12 @@
-<?php include "handy_methods.php" ?>
+<?php 
+include "handy_methods.php";
+
+// Kontrollera om användaren är inloggad, annars skickas den till login sidan
+if(!isset($_SESSION['username'])){
+    header("Location: login.php");
+    exit();
+}
+?>
 <!DOCTYPE html>
 <head>
   <meta charset="UTF-8">
@@ -14,6 +22,7 @@
                 <h2>This is your profile page </h2>
                 <?php include "./view_account.php" ?>
 </article>
+
 <?php include "view_profiles.php" ?>
 
 </body>
