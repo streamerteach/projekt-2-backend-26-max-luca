@@ -18,20 +18,24 @@ $_SESSION['user_id'] = $row['id'];
 
 
 // Updatera profile
-
+// Kontrollera om update knappen tryckts
 if(isset($_POST['update_profile'])){
 
+    // Hämta och rensa input från formuläret
     $realname = test_input($_POST['realname']);
     $bio = test_input($_POST['bio']);
     $salary = test_input($_POST['salary']);
 
+    // SQL query för att uppdatera användarens profil
     $sql = "UPDATE profiles 
             SET realname=?, bio=?, salary=? 
             WHERE id=?";
 
     $stmt = $conn->prepare($sql);
+    // Skicka värden till databasen
     $stmt->execute([$realname, $bio, $salary, $_SESSION['user_id']]);
 
+    // Bekräftelse på sidan
     print("Profile updated!");
 }
 
@@ -49,5 +53,6 @@ if(isset($_POST['delete_profile'])){
 
     print("Profile deleted");
 
+    // Logga ut användaren och ta bort session
     session_destroy();
 }

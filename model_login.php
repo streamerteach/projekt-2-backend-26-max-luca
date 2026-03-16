@@ -1,5 +1,6 @@
 <?php
 
+// Kontrollera om username finns i request
 if(!empty($_REQUEST['username'])){
 $username = test_input($_REQUEST['username']);
 }
@@ -10,18 +11,20 @@ if(isset($_POST['register'])){
 //registrering: Hasha lösenordet och spara i databasen
 $hashed_password = password_hash($_REQUEST['password'], PASSWORD_DEFAULT);
 
+// SQL query för att skapa ny användare
 $sql = "INSERT INTO profiles 
 (id, username, realname, passhash, zipcode, bio, salary, preference, email, likes, role)
 VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 $stmt = $conn->prepare($sql);
 
+// Skicka värden till databasen
 $stmt->execute([$_POST['username'], $_POST['realname'], $hashed_password, '12345', 'Hej', '100', '2', $_POST['username'].'@test.com', '0', '1']);
-print_r($stmt->errorInfo());
 
+// Bekräftelse på sidan
 print("Skapa ny användare!");
 print ("<p>Hashed password stored in DB: " . $hashed_password . "</p>");
-
+// Skicka tillbaka användaren till login sidan
 header("Location: login.php");
 exit();
 
@@ -30,6 +33,7 @@ exit();
 
 // Loginrequest: Verifiera inmatat lösenord med has från DB
 if (!empty($_REQUEST['password']) && isset($_POST['login'])) {
+
  //ToDo: Hämta hashen från databasen
  $sql = "SELECT passhash FROM profiles WHERE username = ?";
  $result = $conn->prepare($sql);
@@ -38,15 +42,23 @@ if (!empty($_REQUEST['password']) && isset($_POST['login'])) {
  //Hämta passhash från assaciotaive arrayn
  $hash_from_DB = $row ? $row['passhash'] : null;
 
-//Verify login
+// Verify login
 if ($row && password_verify($_REQUEST['password'], $hash_from_DB)) {
+
     print ("<p>Password matches hash from DB, Logging in...</p>");
+
     // Lagra användarnamn i sessionsvariabel
     $_SESSION['username'] = test_input($_REQUEST['username']);
+
+    // Skicka användaren till profile sidan
     header("Location: profile.php");
     exit();
+
     } 
     else {
+
+    // Fel lösenord eller användare finns inte
     print ("<p>Password does not match hash from DB, Try again...</p>");
+
     }
 }

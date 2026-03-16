@@ -26,5 +26,3 @@
 <form action="profile.php" method="POST">
     <input type="submit" name="delete_profile" value="Delete my profile">
 </form>
-
-<!-- ToDo: Visa upp login/registreringsinformation -->
