@@ -4,5 +4,6 @@
 <ul>
 <li><a href="login.php">Login</a></li>
 <li><a href="profile.php">Profile</a></li>
+<li><a href="reflektion.html">Reflektion</a></li>
 </ul>
 </header>
